@@ -1,0 +1,33 @@
+<div class="list">
+
+ <div information-field-filter class="metadatafilter-box"></div>
+
+  <div select-all class="controls-box">
+    <!-- Content provided by selectAll directive. -->
+  </div>
+  <span class="loader" ng-class="{loading:loading}" translate="LOADING"></span>
+  <div ui-scroll-viewport class="list-box">
+    <div ng-if="isEmpty()" class="empty-info" translate="NO_ASSETS"></div>
+    <ul ng-class="{empty:isEmpty()}" class="assetList">
+      <li ui-scroll="item in data" adapter="listAdapter" buffer-size="10" padding="1" data-id="{{item.id}}" class="item-wrapper animate"
+          ng-click="assetClick($event, $index, item);"
+          ng-dblClick="assetDblClick($event, $index, item);"
+          ng-class="{selected: isSelectedAsset(item.id), active: $index == active, disabled: isDisabledAsset(item)}"
+          on-finish-render="ngRepeatFinished" is-loading="loading">
+        <div class="bullets" ng-if="showBullets() === true && item.bullets.length > 0">
+          <span ng-repeat="bullet in item.bullets" class="bullet {{bullet.iconClass}}" title="{{getLocalizedBullet(bullet)}}"></span>
+        </div>
+        <div class="bullets" ng-if="showBullets() === true && item.bullets.length == 0"></div>
+        <span class="icon-action"></span>
+        <div class="thumb">
+          <img ng-if="item.currentVersion.previewUrls.THUMB != undefined && item.currentVersion.fileCategory != 'AUDIO'" ng-src="{{item.currentVersion.previewUrls.THUMB}}"
+               title="{{item.name}}" alt="{{item.name}}"/>
+          <span ng-if="item.currentVersion.previewUrls.THUMB == undefined && item.currentVersion.fileCategory == 'AUDIO' " class="thumbnail celum-icon-audio"></span>
+          <span ng-if="item.currentVersion.previewUrls.THUMB == undefined && item.currentVersion.fileCategory != 'AUDIO'" class="thumbnail celum-icon-format_original"></span>
+        </div>
+        <span class="preview-action"></span>
+        <div class="name">{{item.name}}</div>
+      </li>
+    </ul>
+  </div>
+</div>

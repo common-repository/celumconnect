@@ -1,0 +1,8 @@
+<div class="hide-close-wrapper" ng-class="{ open: sidebarOpen }" ng-click="toggleSidebar();">
+  <i class="action-icon celum-icon-previous" ng-if="sidebarOpen !== true"></i>
+  <i class="action-icon celum-icon-next" ng-if="sidebarOpen === true"></i>
+</div>
+<div ng-repeat="data in assetData" class="meta-info-box">
+  <div class="data-label">{{data.label}}</div>
+  <div class="data-value">{{data.value}}</div>
+</div>
